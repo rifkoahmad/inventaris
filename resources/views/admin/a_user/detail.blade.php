@@ -11,7 +11,7 @@
                         <h4 class="card-title text-center">Detail User</h4>
                     </div>
                     <div class="d-flex justify-content-start mb-4">
-                        <a href="{{ route('user.index')}}" class="btn btn-secondary ms-0,1">Back</a>
+                        <a href="{{ route('user.index') }}" class="btn btn-secondary ms-0,1">Back</a>
                     </div>
                     <div class="card-content"></div>
                     <div class="table-responsive">
@@ -26,7 +26,13 @@
                             </tr>
                             <tr>
                                 <th>Peran</th>
-                                <td>: {{ $user->peran }}</td>
+                                <td>:
+                                    @if (!empty($user->getRoleNames()))
+                                        @foreach ($user->getRoleNames() as $rolename)
+                                            <label class="badge bg-primary mx-1">{{ $rolename }}</label>
+                                        @endforeach
+                                    @endif
+                                </td>
                             </tr>
                             <tr>
                                 <th>Password</th>

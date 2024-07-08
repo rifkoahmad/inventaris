@@ -118,7 +118,7 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto my-2 my-lg-0">
                         <ul class="navbar-nav ms-auto my-2 my-lg-0">
-                            <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#home">Dashboard</a></li>
                             <li class="nav-item"><a class="nav-link" href="#about">About Us</a></li>
                             <li class="nav-item"><a class="nav-link" href="#berita">Berita</a></li>
                             <li class="nav-item"><a class="nav-link" href="#contact">Contact Us</a></li>

@@ -13,6 +13,8 @@ class Pegawai extends Model
     protected $fillable = ['users_id', 'nama', 'nip_nik', 'jabatan_akademik', 'no_telepon', 'email', 'foto'];
 
 
+    protected $table = 'pegawais';
+    protected $primaryKey = 'id';
     public function users(): BelongsTo
     {
         return $this->belongsTo(User::class, 'users_id', 'id');

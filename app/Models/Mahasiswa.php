@@ -18,6 +18,8 @@ class Mahasiswa extends Model
         'angkatan',
         'ipk',
     ];
+    protected $table = 'mahasiswas';
+    protected $primaryKey = 'id';
 
     public function prodis(): BelongsTo
     {

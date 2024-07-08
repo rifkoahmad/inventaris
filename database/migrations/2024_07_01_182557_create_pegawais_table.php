@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('pegawais', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('users_id');
-            $table->foreign('users_id')->references('id')->on('users'); // asumsi nama tabel untuk akun adalah 'users'
+            $table->foreign('users_id')->references('id')->on('users'); 
             $table->string('nama', 100);
             $table->bigInteger('nip_nik')->unique();
             $table->string('jabatan_akademik', 50)->nullable();

@@ -8,40 +8,17 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\Mahasiswa;
+use App\Models\Pegawai;
+use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    // public function index()
-    // {
-    //     return view('admin.a_user.index', [
-    //         'user' => User::orderByRaw("
-    //             FIELD(peran, 'pimpinan','admin', 'staff', 'dosen', 'mahasiswa')
-    //         ")->get()
-    //     ]);
-    // }
-
     public function index(Request $request)
     {
-        $query = User::query()->orderByRaw("FIELD(peran, 'pimpinan', 'admin', 'staff', 'dosen', 'mahasiswa')");
-
-        if ($request->has('name') && $request->name != '') {
-            $query->where('name', 'like', '%' . $request->name . '%');
-        }
-
-        if ($request->has('email') && $request->email != '') {
-            $query->where('email', 'like', '%' . $request->email . '%');
-        }
-
-        if ($request->has('peran') && $request->peran != '') {
-            $query->where('peran', $request->peran);
-        }
-
-        $users = $query->get();
-
+        $users = User::get();
         return view('admin.a_user.index', compact('users'));
     }
 
@@ -50,22 +27,30 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.a_user.create');
+        $roles = Role::pluck('name', 'name')->all();
+        return view('admin.a_user.create', compact('roles'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(UserRequest $request)
+    public function store(Request $request)
     {
-        $data = $request->validated();
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email',
+            'password' => 'required|string|min:8|max:30',
+            'roles' => 'required',
+        ]);
 
-        $data = User::create($data);
-        if ($data) {
-            return to_route('user.index')->with('success', 'Berhasil Menambah Data');
-        } else {
-            return to_route('user.index')->with('failed', 'Gagal Menambah Data');
-        }
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        $user->syncRoles($request->roles);
+        return redirect()->route('user.index')->with('success', 'User berhasil dibuat dengan hak akses');
     }
 
     /**
@@ -82,23 +67,43 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        $user = User::findOrFail($id);
-        return view('admin.a_user.edit', compact('user'));
+        $roles = Role::pluck('name', 'name')->all();
+        $user = User::find($id);
+        //dd($user);
+        $userRoles = $user->roles->pluck('name', 'name')->all();
+        return view('admin.a_user.edit', [
+            'user' => $user,
+            'roles' => $roles,
+            'userRoles' => $userRoles,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUserRequest $request, string $id)
+    public function update(Request $request, string $id)
     {
-        $data = $request->validated();
+        $request -> validate([
+            'name' => 'required|string|max:255',
+            'password' => 'nullable|string|min:8|max:30',
+            'roles' => 'required',
+        ]);
 
-        $user = User::find($id)->update($data);
-        if ($user) {
-            return to_route('user.index')->with('success', 'Berhasil Mengubah Data');
-        } else {
-            return to_route('user.index')->with('failed', 'Gagal Mengubah Data');
+        $data = [
+            'name' => $request->name,
+            'roles' => $request->roles,
+        ];
+
+        if(!empty($request->password)){
+            $data = [
+                'password' => Hash::make($request->password),
+            ];
         }
+        $user = User::find($id);
+        //dd($user);
+        $user->update($data);
+        $user->syncRoles($request->roles);
+        return redirect()->route('user.index')->with('success','User berhasil di perbaharui dengan hak akses');
     }
 
     /**
@@ -106,18 +111,23 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
 
-        if ($user) {
-            if ($user->peran === 'admin') {
-                return to_route('user.index')->with('failed', 'Tidak dapat menghapus pengguna dengan peran Admin');
-            }
+    // Periksa apakah ID user masih digunakan di tabel Mahasiswa atau Pegawai
+    $isUsed = Mahasiswa::where('users_id', $id)->exists();
+    $isUsed2 = Pegawai::where('users_id', $id)->exists();
 
-            $user->delete();
-            return to_route('user.index')->with('success', 'Berhasil Menghapus Data');
-        } else {
-            return to_route('user.index')->with('failed', 'Pengguna tidak ditemukan');
-        }
+    if ($isUsed) {
+        return redirect()->route('user.index')->with('failed', 'User tidak dapat dihapus karena masih digunakan di tabel mahasiswa.');
+    }
+    if ($isUsed2) {
+        return redirect()->route('user.index')->with('failed', 'User tidak dapat dihapus karena masih digunakan di tabel pegawai.');
+    }
+
+    // Jika tidak digunakan, lanjutkan dengan penghapusan
+    $user->delete();
+
+    return redirect()->route('user.index')->with('success', 'User berhasil dihapus.');
     }
 
     public function export()

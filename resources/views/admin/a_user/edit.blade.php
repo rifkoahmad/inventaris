@@ -48,51 +48,50 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group has-icon-left">
-                                        <label for="peran">Peran</label>
-                                        <div class="position-relative">
-                                            <select id="peran" name="peran"
-                                                class="form-control @error('peran') is-invalid @enderror">
-                                                <option value="admin" {{ old('peran',$user->peran) == 'admin' ? 'selected' : '' }}>Admin</option>
-                                                <option value="pimpinan" {{ old('peran',$user->peran) == 'pimpinan' ? 'selected' : '' }}>Pimpinan</option>
-                                                <option value="mahasiswa" {{ old('peran',$user->peran) == 'mahasiswa' ? 'selected' : '' }}>Mahasiswa</option>
-                                                <option value="dosen" {{ old('peran',$user->peran) == 'dosen' ? 'selected' : '' }}>Dosen</option>
-                                                <option value="staff" {{ old('peran',$user->peran) == 'staff' ? 'selected' : '' }}>Staff</option>
-                                            </select>
-                                            @error('peran')
-                                                <div class="alert alert-danger">{{ $message }}</div>
-                                            @enderror
-                                            <div class="form-control-icon">
-                                                <i class="bi bi-person-check"></i> <!-- Icon untuk peran -->
-                                            </div>
+                                        <label for="roles[]" class="form-label">Roles</label>
+                                        <select name="roles[]" class="form-control" multiple>
+                                            <option value="">Pilih Role</option>
+                                            @foreach ($roles as $role)
+                                                <option value="{{ $role }}"
+                                                    {{ in_array($role, $userRoles) ? 'selected' : '' }}>{{ $role }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('roles')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-person-check"></i> <!-- Icon untuk peran -->
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group has-icon-left">
-                                        <label for="password">Password</label>
-                                        <div class="position-relative">
-                                            <input type="password" id="password" name="password"
-                                                class="form-control @error('password') is-invalid @enderror" value="{{ old('password', $user->password) }}"
-                                                placeholder="Masukkan Password">
-                                            @error('password')
-                                                <div class="alert alert-danger">{{ $message }}</div>
-                                            @enderror
-                                            <div class="form-control-icon">
-                                                <i class="bi bi-lock"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12 d-flex justify-content-end">
-                                    <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
-                                    <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
-                                    <a href="{{ route('user.index') }}" class="btn btn-light-secondary me-1 mb-1">Back</a>
                                 </div>
                             </div>
+                            <div class="col-12">
+                                <div class="form-group has-icon-left">
+                                    <label for="password">Password</label>
+                                    <div class="position-relative">
+                                        <input type="password" id="password" name="password"
+                                            class="form-control @error('password') is-invalid @enderror"
+                                            value="" placeholder="Masukkan Password">
+                                        @error('password')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                        <div class="form-control-icon">
+                                            <i class="bi bi-lock"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 d-flex justify-content-end">
+                                <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                                <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                <a href="{{ route('user.index') }}" class="btn btn-light-secondary me-1 mb-1">Back</a>
+                            </div>
                         </div>
-                    </form>
                 </div>
+                </form>
             </div>
         </div>
+    </div>
     </div>
 @endsection
