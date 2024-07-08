@@ -8,8 +8,10 @@
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h4 class="card-title text-center">Tabel Barang</h4>
                         <div>
-                            <a class="btn btn-success" href="{{ route('barang.create') }}">Tambah</a>
-                            <a class="btn btn-primary" href="{{ route('barang.export') }}">Export</a>
+                            @hasrole('admin')
+                                <a class="btn btn-success" href="{{ route('barang.create') }}">Tambah</a>
+                                <a class="btn btn-primary" href="{{ route('barang.export') }}">Export</a>
+                            @endhasrole
                         </div>
                     </div>
                     @if (session()->has('success'))
@@ -27,16 +29,20 @@
                         <form method="GET" action="{{ route('barang.index') }}" class="mb-3">
                             <div class="row g-3 align-items-center">
                                 <div class="col-md-1">
-                                    <input type="text" name="nama_barang" class="form-control" placeholder="Filter by Nama Barang" value="{{ request()->nama_barang }}">
+                                    <input type="text" name="nama_barang" class="form-control"
+                                        placeholder="Filter by Nama Barang" value="{{ request()->nama_barang }}">
                                 </div>
                                 <div class="col-md-1">
-                                    <input type="text" name="kode_barang" class="form-control" placeholder="Filter by Kode Barang" value="{{ request()->kode_barang }}">
+                                    <input type="text" name="kode_barang" class="form-control"
+                                        placeholder="Filter by Kode Barang" value="{{ request()->kode_barang }}">
                                 </div>
                                 <div class="col-md-1">
                                     <select name="status" class="form-control">
                                         <option value="">All</option>
-                                        <option value="0" {{ request()->status == '0' ? 'selected' : '' }}>Rusak</option>
-                                        <option value="1" {{ request()->status == '1' ? 'selected' : '' }}>Bagus</option>
+                                        <option value="0" {{ request()->status == '0' ? 'selected' : '' }}>Rusak
+                                        </option>
+                                        <option value="1" {{ request()->status == '1' ? 'selected' : '' }}>Bagus
+                                        </option>
                                     </select>
                                 </div>
                                 <div class="col-md-3">
@@ -75,13 +81,17 @@
                                         </td>
                                         <td>
                                             <div class="d-flex justify-content-center">
-                                                <a class="btn btn-primary btn-sm me-2" href="{{ route('barang.show', $item->id) }}">
+                                                <a class="btn btn-primary btn-sm me-2"
+                                                    href="{{ route('barang.show', $item->id) }}">
                                                     <i class="bi bi-eye"></i> Detail
                                                 </a>
-                                                <a class="btn btn-primary btn-sm me-2" href="{{ route('barang.edit', $item->id) }}">
+                                                <a class="btn btn-primary btn-sm me-2"
+                                                    href="{{ route('barang.edit', $item->id) }}">
                                                     <i class="bi bi-pencil-square"></i> Edit
                                                 </a>
-                                                <form action="{{ route('barang.destroy', $item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Anda yakin ingin menghapus data barang ini?')">
+                                                <form action="{{ route('barang.destroy', $item->id) }}" method="POST"
+                                                    class="d-inline"
+                                                    onsubmit="return confirm('Anda yakin ingin menghapus data barang ini?')">
                                                     @csrf
                                                     @method('delete')
                                                     <button type="submit" class="btn btn-danger btn-sm">

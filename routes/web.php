@@ -40,6 +40,7 @@ Route::get('/login', [AuthenticatedSessionController::class, 'create'])
     Route::post('/login', [AuthenticatedSessionController::class, 'store'])
     ->middleware('guest');
 Route::get('/admin/logout', [AdminController::class, 'destroy'])->name('admin.logout');
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile_user', function () {
         return view('admin.a_profile.profile');
@@ -107,7 +108,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 
     // Admin, Staff, & Dosen
-    Route::middleware(['role:admin|staff|dosen'])->group(function () {
+    Route::middleware(['role:admin'])->group(function () {
         // Kategori Berita
         Route::prefix('kategori-berita')->group(function () {
             Route::get('/', [KategoriBeritaController::class, 'index'])->name('kategoriberita.index');
@@ -131,7 +132,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 
     // Admin & Staff
-    Route::middleware(['role:admin|staff'])->group(function () {
+    Route::middleware(['role:admin'])->group(function () {
         // User
         Route::prefix('user')->group(function () {
             Route::get('/', [UserController::class, 'index'])->name('user.index');

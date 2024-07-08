@@ -32,6 +32,7 @@
                             <span>Barang</span>
                         </a>
                     </li>
+                    @hasanyrole('admin|pimpinanJurusan')
                     <li class="sidebar-item">
                         <a href="{{ route('barangmasuk.index') }}" class='sidebar-link'>
                             <i class="bi bi-arrow-down-circle-fill"></i> <!-- Icon untuk Barang Masuk -->
@@ -44,7 +45,8 @@
                             <span>Barang Keluar</span>
                         </a>
                     </li>
-                    @hasanyrole('admin|staff')
+                    @endhasanyrole
+                    @hasrole('admin')
                         <li class="sidebar-item">
                             <a href="{{ route('supplier.index') }}" class='sidebar-link'>
                                 <i class="bi bi-people-fill"></i> <!-- Icon untuk Supplier -->
@@ -57,8 +59,8 @@
                                 <span>Ruangan</span>
                             </a>
                         </li>
-                    @endhasanyrole
-
+                    @endhasrole
+                    @hasanyrole('admin|staff|dosen|mahasiswa')
                     <li class="sidebar-title">Manajemen Peminjaman</li>
                     <li class="sidebar-item">
                         <a href="{{ route('peminjaman.index') }}" class='sidebar-link'>
@@ -72,7 +74,8 @@
                             <span>Pengembalian</span>
                         </a>
                     </li>
-                    @hasanyrole('admin|staff|dosen')
+                    @endhasanyrole
+                    @hasrole('admin')
                         <li class="sidebar-title">Manajemen Berita</li>
                         <li class="sidebar-item ">
                             <a href="{{ route('kategoriberita.index') }}" class='sidebar-link'>
@@ -86,9 +89,9 @@
                                 <span>Berita</span>
                             </a>
                         </li>
-                    @endhasanyrole
+                    @endhasrole
 
-                    @hasanyrole('admin|staff')
+                    @hasrole('admin')
                         <li class="sidebar-title">Manajemen Pengguna</li>
                         <li class="sidebar-item">
                             <a href="{{ route('user.index') }}" class='sidebar-link'>
@@ -122,7 +125,7 @@
                                 <span>Log Aktivitas</span>
                             </a>
                         </li>
-                    @endhasanyrole
+                    @endhasrole
                     <li class="sidebar-item">
                         <a href="{{ route('admin.logout') }}" class='sidebar-link btn btn-danger btn-sm'>
                             <i class="bi bi-box-arrow-left"></i> <!-- Icon untuk Log Aktivitas -->

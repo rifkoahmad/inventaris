@@ -58,7 +58,7 @@
                                                     href="{{ route('user.show', $item->id) }}">
                                                     <i class="bi bi-eye"></i> Detail
                                                 </a>
-                                                @if ($item->peran !== 'admin')
+                                                {{-- @if ($item->peran !== 'admin')
                                                     <a class="btn btn-primary btn-sm me-2"
                                                         href="{{ route('user.edit', $item->id) }}">
                                                         <i class="bi bi-pencil-square"></i> Edit
@@ -67,15 +67,23 @@
                                                     <button class="btn btn-primary btn-sm me-2" disabled>
                                                         <i class="bi bi-pencil-square"></i> Edit
                                                     </button>
-                                                @endif
+                                                @endif --}}
+                                                @if($item->name == 'Admin User')
+                                                @else
+                                                <a class="btn btn-primary btn-sm me-2"
+                                                        href="{{ route('user.edit', $item->id) }}">
+                                                        <i class="bi bi-pencil-square"></i> Edit
+                                                    </a>
                                                 <form action="{{ route('user.destroy', $item->id) }}" method="POST"
                                                     class="d-inline delete-form">
                                                     @csrf
                                                     @method('delete')
+
                                                     <button type="button" class="btn btn-danger btn-sm delete-button">
                                                         <i class="bi bi-trash-fill"></i> Delete
                                                     </button>
                                                 </form>
+                                                @endif
                                             </div>
                                         </td>
                                     </tr>
