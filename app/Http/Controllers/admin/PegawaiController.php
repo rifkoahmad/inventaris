@@ -104,16 +104,28 @@ class PegawaiController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        $data = Pegawai::find($id);
-        Storage::delete('public/image/' . $data->foto);
-        $data->delete();
+        $pegawai = Pegawai::find($id);
 
-        if ($id) {
-            return to_route('pegawai.index')->with('success', 'Berhasil Menghapus Data');
-        } else {
-            return to_route('pegawai.index')->with('failed', 'Gagal Menghapus Data');
+        // Check if there are related peminjamen
+        if ($pegawai->peminjamen()->exists()) {
+            return redirect()->route('pegawai.index')->with('failed', 'Pegawai tidak dapat dihapus karena sedang melakukan peminjaman.');
         }
+
+        // Check if there are related pengembalians that are not returned
+        if ($pegawai->pengembalians()->whereNull('tanggal_kembali')->exists()) {
+            return redirect()->route('pegawai.index')->with('failed', 'Pegawai tidak dapat dihapus karena belum mengembalikan barang.');
+        }
+
+        // Delete the photo from storage if exists
+        if ($pegawai->foto) {
+            Storage::delete('public/image/' . $pegawai->foto);
+        }
+
+        // Delete the pegawai
+        $pegawai->delete();
+
+        return redirect()->route('pegawai.index')->with('success', 'Berhasil menghapus data pegawai.');
     }
 }

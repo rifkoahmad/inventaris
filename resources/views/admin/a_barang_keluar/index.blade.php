@@ -40,7 +40,7 @@
                                         <td>{{ $item->tanggal_keluar }}</td>
                                         <td>
                                             <div class="d-flex justify-content-center">
-                                                <form action="{{ route('barangkeluar.destroy', $item->id) }}" method="POST" class="d-inline">
+                                                <form action="{{ route('barangkeluar.destroy', $item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
                                                     @csrf
                                                     @method('delete')
                                                     <button class="btn btn-danger btn-sm">

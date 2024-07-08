@@ -32,7 +32,6 @@
                                     <th>Jabatan Akademik</th>
                                     <th>No Telepon</th>
                                     <th>Email</th>
-                                    {{-- <th>Foto</th> --}}
                                     <th>Function</th>
                                 </tr>
                             </thead>
@@ -45,14 +44,6 @@
                                         <td>{{ $item->jabatan_akademik }}</td>
                                         <td>{{ $item->no_telepon }}</td>
                                         <td>{{ $item->email }}</td>
-                                        {{-- <td>
-                                            @if ($item->foto)
-                                                {{ $item->foto }}
-                                                <img src="{{ asset($item->foto) }}" alt="foto_pegawai" style="max-width: 100px; max-height: 100px;">
-                                            @else
-                                                <span>Tidak ada foto</span>
-                                            @endif
-                                        </td> --}}
                                         <td>
                                             <div class="d-flex justify-content-center">
                                                 <a class="btn btn-primary btn-sm me-2" href="{{ route('pegawai.show', $item->id) }}">
@@ -61,7 +52,7 @@
                                                 <a class="btn btn-primary btn-sm me-2" href="{{ route('pegawai.edit', $item->id) }}">
                                                     <i class="bi bi-pencil-square"></i> Edit
                                                 </a>
-                                                <form action="{{ route('pegawai.destroy', $item->id) }}" method="POST" class="d-inline">
+                                                <form action="{{ route('pegawai.destroy', $item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
                                                     @csrf
                                                     @method('delete')
                                                     <button class="btn btn-danger btn-sm">

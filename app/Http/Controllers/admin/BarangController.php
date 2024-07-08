@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Exports\BarangExport;
 use App\Http\Controllers\Controller;
 use App\Models\Barang;
 use App\Models\Ruangan;
@@ -9,18 +10,33 @@ use Illuminate\Http\Request;
 use App\Http\Requests\BarangRequest;
 use App\Http\Requests\UpdateBarangRequest;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class BarangController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        return view('admin.a_barang.index', [
-            'barang' => Barang::with('ruangans')->latest()->get()
-        ]);
+    public function index(Request $request)
+{
+    $query = Barang::with('ruangans')->latest();
+
+    if ($request->nama_barang) {
+        $query->where('nama_barang', 'like', '%' . $request->nama_barang . '%');
     }
+
+    if ($request->kode_barang) {
+        $query->where('kode_barang', 'like', '%' . $request->kode_barang . '%');
+    }
+
+    if ($request->status !== null) {
+        $query->where('status', $request->status);
+    }
+
+    $barang = $query->get();
+    return view('admin.a_barang.index', compact('barang'));
+}
+
 
     /**
      * Show the form for creating a new resource.
@@ -115,5 +131,11 @@ class BarangController extends Controller
         } else {
             return to_route('barang.index')->with('failed', 'Gagal Menghapus Data');
         }
+    }
+
+    public function export()
+    {
+        $barangs = Barang::all();
+        return Excel::download(new BarangExport($barangs), 'barang.xlsx');
     }
 }

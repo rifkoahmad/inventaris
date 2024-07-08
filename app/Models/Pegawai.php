@@ -17,4 +17,15 @@ class Pegawai extends Model
     {
         return $this->belongsTo(User::class, 'users_id', 'id');
     }
+
+    public function peminjamen()
+    {
+        return $this->hasMany(Peminjaman::class, 'pegawais_id');
+    }
+
+    public function pengembalians()
+{
+    return $this->hasMany(Pengembalian::class, 'pegawais_id');
+}
+
 }

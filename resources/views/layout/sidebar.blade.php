@@ -148,10 +148,10 @@
 
                 <li class="sidebar-item">
                     @auth
-                        <form action="#" method="post">
+                        <form action="{{ route('logout') }}" method="post">
                             @csrf
-                            <button class="btn btn-danger btn-sm"> <!-- Tombol Logout dengan ukuran yang sama -->
-                                <i class="bi bi-box-arrow-left"></i> <!-- Icon untuk Logout -->
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                <i class="bi bi-box-arrow-left"></i>
                                 Logout
                             </button>
                         </form>

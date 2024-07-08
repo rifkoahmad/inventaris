@@ -15,7 +15,10 @@ use App\Http\Controllers\admin\ProdiController;
 use App\Http\Controllers\admin\RuanganController;
 use App\Http\Controllers\admin\SupplierController;
 use App\Http\Controllers\admin\UserController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -28,10 +31,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
+
+//Login
+Route::get('/login', [AuthenticatedSessionController::class, 'create'])
+    ->middleware('guest')
+    ->name('login');
+
+Route::post('/login', [AuthenticatedSessionController::class, 'store'])
+    ->middleware('guest');
+
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
+    ->middleware('auth')
+    ->name('logout');
+    
+    route::get('/',function(){
+        return view('frontend.index');
+    });
 // Dashboard
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
@@ -51,6 +67,7 @@ Route::get('/barang/{id}', [BarangController::class, 'show'])->name('barang.show
 Route::get('/barang/{id}/edit', [BarangController::class, 'edit'])->name('barang.edit');
 Route::put('/barang/{id}/update', [BarangController::class, 'update'])->name('barang.update');
 Route::delete('/barang/{id}/destroy',[BarangController::class, 'destroy'])->name('barang.destroy');
+Route::get('/barang-export', [BarangController::class, 'export'])->name('barang.export');
 
 // Barang Masuk
 Route::get('/barang-masuk',[BarangMasukController::class, 'index'])->name('barangmasuk.index');
@@ -111,9 +128,11 @@ Route::delete('/berita/{id}/destroy',[BeritaController::class, 'destroy'])->name
 Route::get('/user', [UserController::class, 'index'])->name('user.index');
 Route::get('/create-user', [UserController::class, 'create'])->name('user.create');
 Route::post('/user', [UserController::class, 'store'])->name('user.store');
+Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
 Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
 Route::put('/user/{id}/update', [UserController::class, 'update'])->name('user.update');
 Route::delete('/user/{id}/destroy',[UserController::class, 'destroy'])->name('user.destroy');
+Route::get('/user-export', [UserController::class, 'export'])->name('user.export');
 
 // Pegawai/Dosen/Staff
 Route::get('/pegawai', [PegawaiController::class, 'index'])->name('pegawai.index');
@@ -140,5 +159,10 @@ Route::get('/mahasiswa/{id}', [MahasiswaController::class, 'show'])->name('mahas
 Route::get('/mahasiswa/{id}/edit', [MahasiswaController::class, 'edit'])->name('mahasiswa.edit');
 Route::put('/mahasiswa/{id}/update', [MahasiswaController::class, 'update'])->name('mahasiswa.update');
 Route::delete('/mahasiswa/{id}/destroy',[MahasiswaController::class, 'destroy'])->name('mahasiswa.destroy');
+Route::get('/mahasiswa-export', [MahasiswaController::class, 'export'])->name('mahasiswa.export');
 
 // Log Aktivitas
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

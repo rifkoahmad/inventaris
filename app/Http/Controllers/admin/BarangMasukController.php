@@ -7,6 +7,7 @@ use App\Models\Barang;
 use App\Models\BarangMasuk;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB; // Import DB untuk transaksi
 
 class BarangMasukController extends Controller
 {
@@ -15,9 +16,8 @@ class BarangMasukController extends Controller
      */
     public function index()
     {
-        return view('admin.a_barang_masuk.index', [
-            'barangmasuk' => BarangMasuk::with('barangs','suppliers')->latest()->get()
-        ]);
+        $barangmasuk = BarangMasuk::with('barangs', 'suppliers')->latest()->get();
+        return view('admin.a_barang_masuk.index', compact('barangmasuk'));
     }
 
     /**
@@ -25,10 +25,9 @@ class BarangMasukController extends Controller
      */
     public function create()
     {
-        return view('admin.a_barang_masuk.create', [
-            'barang' => Barang::get(),
-            'supplier' => Supplier::get()
-        ]);
+        $barang = Barang::all();
+        $supplier = Supplier::all();
+        return view('admin.a_barang_masuk.create', compact('barang', 'supplier'));
     }
 
     /**
@@ -37,72 +36,104 @@ class BarangMasukController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'barangs_id'   => 'required',
-            'suppliers_id'=> 'required',
+            'barangs_id' => 'required',
+            'suppliers_id' => 'required',
             'jumlah_barang' => 'required|integer|min:0',
             'tanggal_masuk' => 'required'
         ]);
 
-        $barangmasuk = BarangMasuk::create($data);
-        if ($barangmasuk) {
-            return to_route('barangmasuk.index')->with('success', 'Berhasil Menambah Data');
-        } else {
-            return to_route('barangmasuk.index')->with('failed', 'Gagal Menambah Data');
-        }
-    }
+        // Gunakan transaksi untuk memastikan konsistensi data
+        DB::beginTransaction();
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        try {
+            $barangmasuk = BarangMasuk::create($data);
+
+            // Update stok barang
+            $barang = Barang::findOrFail($data['barangs_id']);
+            $barang->stok += $data['jumlah_barang'];
+            $barang->save();
+
+            DB::commit();
+
+            return redirect()->route('barangmasuk.index')->with('success', 'Berhasil Menambah Data');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->route('barangmasuk.index')->with('failed', 'Gagal Menambah Data');
+        }
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        return view('admin.a_barang_masuk.edit', [
-            'barangmasuk' => BarangMasuk::find($id),
-            'barang' => Barang::get(),
-            'supplier' => Supplier::get()
-        ]);
+        $barangmasuk = BarangMasuk::findOrFail($id);
+        $barang = Barang::all();
+        $supplier = Supplier::all();
+        return view('admin.a_barang_masuk.edit', compact('barangmasuk', 'barang', 'supplier'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
         $barangmasuk = BarangMasuk::findOrFail($id);
 
         $data = $request->validate([
-            'barangs_id'   => 'required',
-            'suppliers_id'=> 'required',
+            'barangs_id' => 'required',
+            'suppliers_id' => 'required',
             'jumlah_barang' => 'required|integer|min:0',
             'tanggal_masuk' => 'required'
         ]);
 
-        $barangmasuk->update($data);
-        if ($barangmasuk) {
-            return to_route('barangmasuk.index')->with('success', 'Berhasil Menyimpan Data');
-        } else {
-            return to_route('barangmasuk.index')->with('failed', 'Gagal Menyimpan Data');
+        // Gunakan transaksi untuk memastikan konsistensi data
+        DB::beginTransaction();
+
+        try {
+            // Hitung perbedaan jumlah barang untuk update stok
+            $difference = $data['jumlah_barang'] - $barangmasuk->jumlah_barang;
+
+            // Update stok barang
+            $barang = Barang::findOrFail($data['barangs_id']);
+            $barang->stok += $difference;
+            $barang->save();
+
+            $barangmasuk->update($data);
+
+            DB::commit();
+
+            return redirect()->route('barangmasuk.index')->with('success', 'Berhasil Menyimpan Data');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->route('barangmasuk.index')->with('failed', 'Gagal Menyimpan Data');
         }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        $barangmasuk = BarangMasuk::find($id)->delete();
-        if ($barangmasuk) {
-            return to_route('barangmasuk.index')->with('success', 'Berhasil Menghapus Data');
-        } else {
-            return to_route('barangmasuk.index')->with('failed', 'Gagal Menghapus Data');
+        // Gunakan transaksi untuk memastikan konsistensi data
+        DB::beginTransaction();
+
+        try {
+            $barangmasuk = BarangMasuk::findOrFail($id);
+
+            // Kurangi stok barang
+            $barang = Barang::findOrFail($barangmasuk->barangs_id);
+            $barang->stok -= $barangmasuk->jumlah_barang;
+            $barang->save();
+
+            $barangmasuk->delete();
+
+            DB::commit();
+
+            return redirect()->route('barangmasuk.index')->with('success', 'Berhasil Menghapus Data');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->route('barangmasuk.index')->with('failed', 'Gagal Menghapus Data');
         }
     }
 }

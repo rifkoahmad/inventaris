@@ -2,24 +2,47 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Exports\UserExport;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    // public function index()
+    // {
+    //     return view('admin.a_user.index', [
+    //         'user' => User::orderByRaw("
+    //             FIELD(peran, 'pimpinan','admin', 'staff', 'dosen', 'mahasiswa')
+    //         ")->get()
+    //     ]);
+    // }
+
+    public function index(Request $request)
     {
-        return view('admin.a_user.index', [
-            'user' => User::orderByRaw("
-                FIELD(peran, 'pimpinan','admin', 'staff', 'dosen', 'mahasiswa')
-            ")->get()
-        ]);
+        $query = User::query()->orderByRaw("FIELD(peran, 'pimpinan', 'admin', 'staff', 'dosen', 'mahasiswa')");
+
+        if ($request->has('name') && $request->name != '') {
+            $query->where('name', 'like', '%' . $request->name . '%');
+        }
+
+        if ($request->has('email') && $request->email != '') {
+            $query->where('email', 'like', '%' . $request->email . '%');
+        }
+
+        if ($request->has('peran') && $request->peran != '') {
+            $query->where('peran', $request->peran);
+        }
+
+        $users = $query->get();
+
+        return view('admin.a_user.index', compact('users'));
     }
 
     /**
@@ -50,7 +73,8 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('admin.a_user.detail', compact('user'));
     }
 
     /**
@@ -58,9 +82,6 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        // return view('admin.a_user.edit', [
-        //     'user' => User::find($id)
-        // ]);
         $user = User::findOrFail($id);
         return view('admin.a_user.edit', compact('user'));
     }
@@ -85,13 +106,24 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        $data = User::find($id);
-        $data->delete();
+        $user = User::find($id);
 
-        if ($id) {
+        if ($user) {
+            if ($user->peran === 'admin') {
+                return to_route('user.index')->with('failed', 'Tidak dapat menghapus pengguna dengan peran Admin');
+            }
+
+            $user->delete();
             return to_route('user.index')->with('success', 'Berhasil Menghapus Data');
         } else {
-            return to_route('user.index')->with('failed', 'Gagal Menghapus Data');
+            return to_route('user.index')->with('failed', 'Pengguna tidak ditemukan');
         }
     }
+
+    public function export()
+    {
+        $users = User::all();
+        return Excel::download(new UserExport($users), 'user.xlsx');
+    }
+
 }

@@ -47,7 +47,7 @@
                                                 <a class="btn btn-primary btn-sm me-2" href="{{ route('barangmasuk.edit', $item->id) }}">
                                                     <i class="bi bi-pencil-square"></i> Edit
                                                 </a>
-                                                <form action="{{ route('barangmasuk.destroy', $item->id) }}" method="POST" class="d-inline">
+                                                <form action="{{ route('barangmasuk.destroy', $item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
                                                     @csrf
                                                     @method('delete')
                                                     <button class="btn btn-danger btn-sm">

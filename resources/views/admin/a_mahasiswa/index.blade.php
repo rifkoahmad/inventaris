@@ -7,7 +7,10 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h4 class="card-title text-center">Tabel Mahasiswa</h4>
-                        <a class="btn btn-success" href="{{ route('mahasiswa.create') }}">Tambah</a>
+                        <div>
+                            <a class="btn btn-success" href="{{ route('mahasiswa.create') }}">Tambah</a>
+                            <a class="btn btn-primary" href="{{ route('mahasiswa.export') }}">Export</a>
+                        </div>
                     </div>
                     @if (session()->has('success'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -21,6 +24,30 @@
                         </div>
                     @endif
                     <div class="card-content">
+                        <form action="{{ route('mahasiswa.index') }}" method="GET" class="mb-3">
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <input type="text" name="nama" class="form-control" placeholder="Nama" value="{{ request()->get('nama') }}">
+                                </div>
+                                <div class="col-md-1">
+                                    <input type="text" name="nim" class="form-control" placeholder="NIM" value="{{ request()->get('nim') }}">
+                                </div>
+                                <div class="col-md-1">
+                                    <input type="text" name="angkatan" class="form-control" placeholder="Angkatan" value="{{ request()->get('angkatan') }}">
+                                </div>
+                                <div class="col-md-1">
+                                    <select name="prodi" class="form-control">
+                                        <option value="">All</option>
+                                        @foreach ($prodis as $prodi)
+                                            <option value="{{ $prodi->id }}" {{ request()->get('prodi') == $prodi->id ? 'selected' : '' }}>{{ $prodi->prodi }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="submit" class="btn btn-primary">Filter</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped text-center">
@@ -52,7 +79,7 @@
                                                 <a class="btn btn-primary btn-sm me-2" href="{{ route('mahasiswa.edit', $item->id) }}">
                                                     <i class="bi bi-pencil-square"></i> Edit
                                                 </a>
-                                                <form action="{{ route('mahasiswa.destroy', $item->id) }}" method="POST" class="d-inline">
+                                                <form action="{{ route('mahasiswa.destroy', $item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
                                                     @csrf
                                                     @method('delete')
                                                     <button class="btn btn-danger btn-sm">
@@ -65,6 +92,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        {{ $mahasiswa->links() }}
                     </div>
                 </div>
             </div>
