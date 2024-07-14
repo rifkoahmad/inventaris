@@ -1,264 +1,277 @@
 @extends('kerangka.master')
 @section('title', 'Dashboard')
 @section('content')
-    <div class="page-content">
-        <section class="row">
-            <div class="col-12 col-lg-9">
-                <div class="row">
-                    <div class="col-6 col-lg-3 col-md-6">
-                        <div class="card">
-                            <div class="card-body px-4 py-4-5">
-                                <div class="row">
-                                    <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                                        <div class="stats-icon purple mb-2">
-                                            <i class="iconly-boldShow"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                        <h6 class="text-muted font-semibold">Profile Views</h6>
-                                        <h6 class="font-extrabold mb-0">112.000</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    <div class="container-fluid">
+        <div class="card bg-info-subtle shadow-none position-relative overflow-hidden mb-4">
+            <div class="card-body px-4 py-3">
+                <div class="row align-items-center">
+                    <div class="col-9">
+                        <h4 class="fw-semibold mb-8">Account Setting</h4>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a class="text-muted text-decoration-none" href="{{ route('dashboard') }}">Home</a>
+                                </li>
+                                <li class="breadcrumb-item" aria-current="page">Account Setting</li>
+                            </ol>
+                        </nav>
                     </div>
-                    <div class="col-6 col-lg-3 col-md-6">
-                        <div class="card">
-                            <div class="card-body px-4 py-4-5">
-                                <div class="row">
-                                    <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                                        <div class="stats-icon blue mb-2">
-                                            <i class="iconly-boldProfile"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                        <h6 class="text-muted font-semibold">Followers</h6>
-                                        <h6 class="font-extrabold mb-0">183.000</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6 col-lg-3 col-md-6">
-                        <div class="card">
-                            <div class="card-body px-4 py-4-5">
-                                <div class="row">
-                                    <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                                        <div class="stats-icon green mb-2">
-                                            <i class="iconly-boldAdd-User"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                        <h6 class="text-muted font-semibold">Following</h6>
-                                        <h6 class="font-extrabold mb-0">80.000</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6 col-lg-3 col-md-6">
-                        <div class="card">
-                            <div class="card-body px-4 py-4-5">
-                                <div class="row">
-                                    <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                                        <div class="stats-icon red mb-2">
-                                            <i class="iconly-boldBookmark"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                        <h6 class="text-muted font-semibold">Saved Post</h6>
-                                        <h6 class="font-extrabold mb-0">112</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Profile Visit</h4>
-                            </div>
-                            <div class="card-body">
-                                <div id="chart-profile-visit"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12 col-xl-4">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Profile Visit</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="d-flex align-items-center">
-                                            <svg class="bi text-primary" width="32" height="32" fill="blue"
-                                                style="width:10px">
-                                                <use xlink:href="assets/images/bootstrap-icons.svg#circle-fill" />
-                                            </svg>
-                                            <h5 class="mb-0 ms-3">Europe</h5>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <h5 class="mb-0">862</h5>
-                                    </div>
-                                    <div class="col-12">
-                                        <div id="chart-europe"></div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="d-flex align-items-center">
-                                            <svg class="bi text-success" width="32" height="32" fill="blue"
-                                                style="width:10px">
-                                                <use xlink:href="assets/images/bootstrap-icons.svg#circle-fill" />
-                                            </svg>
-                                            <h5 class="mb-0 ms-3">America</h5>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <h5 class="mb-0">375</h5>
-                                    </div>
-                                    <div class="col-12">
-                                        <div id="chart-america"></div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="d-flex align-items-center">
-                                            <svg class="bi text-danger" width="32" height="32" fill="blue"
-                                                style="width:10px">
-                                                <use xlink:href="assets/images/bootstrap-icons.svg#circle-fill" />
-                                            </svg>
-                                            <h5 class="mb-0 ms-3">Indonesia</h5>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <h5 class="mb-0">1025</h5>
-                                    </div>
-                                    <div class="col-12">
-                                        <div id="chart-indonesia"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-xl-8">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Latest Comments</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-hover table-lg">
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Comment</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td class="col-3">
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="avatar avatar-md">
-                                                            <img src="{{ asset('template/assets/images/faces/5.jpg') }}">
-                                                        </div>
-                                                        <p class="font-bold ms-3 mb-0">Cantik</p>
-                                                    </div>
-                                                </td>
-                                                <td class="col-auto">
-                                                    <p class=" mb-0">Congratulations on your graduation!</p>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="col-3">
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="avatar avatar-md">
-                                                            <img src="{{ asset('template/assets/images/faces/2.jpg') }}">
-                                                        </div>
-                                                        <p class="font-bold ms-3 mb-0">Ganteng</p>
-                                                    </div>
-                                                </td>
-                                                <td class="col-auto">
-                                                    <p class=" mb-0">Wow amazing design! Can you make another tutorial for
-                                                        this design?</p>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                    <div class="col-3">
+                        <div class="text-center mb-5">
+                            <img src="{{ asset('template/assets/images/logo/logo.svg') }}" height="50%" width="50%"
+                                alt="modernize-img" class="img-fluid mb-n4">
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-lg-3">
-                <div class="card">
-                    <div class="card-body py-4 px-5">
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" role="tabpanel" tabindex="0">
+                        <div class="row">
+                            <div class="col-lg-6 d-flex align-items-stretch">
+                                <div class="card w-100 border position-relative overflow-hidden">
+                                    <div class="card-body p-4">
+                                        <h4 class="card-title">Change Profile</h4>
+                                        @if (session('gambar'))
+                                            <div class="alert alert-success" role="alert">
+                                                {{ session('gambar') }}
+                                            </div>
+                                        @endif
+                                        @if (session('error'))
+                                            <div class="alert alert-success" role="alert">
+                                                {{ session('error') }}
+                                            </div>
+                                        @endif
+                                        @if (session('reset'))
+                                            <div class="alert alert-success" role="alert">
+                                                {{ session('reset') }}
+                                            </div>
+                                        @endif
+                                        <div class="text-center mt-4">
+                                            <form action="{{ route('profile.update') }}" method="POST"
+                                                enctype="multipart/form-data">
+                                                @csrf
+                                                @method('PUT')
 
-                        <div class="d-flex align-items-center">
-                            <div class="avatar avatar-xl">
-                                <img src="{{ asset('template/assets/images/faces/1.jpg') }}" alt="Face 1">
+                                                <!-- Display Current Profile Picture -->
+                                                <img src="{{ asset('profile_pictures/' . (Auth::user()->profile_picture ?? 'default.png')) }}"
+                                                    alt="Profile Picture" class="img-fluid rounded-circle" width="120"
+                                                    height="120">
+
+
+                                                <!-- Upload Button -->
+                                                <div class="d-flex align-items-center justify-content-center my-4 gap-6">
+                                                    <label class="btn btn-primary">
+                                                        Upload
+                                                        <input type="file" name="profile_picture" id="profile_picture"
+                                                            class="d-none" onchange="this.form.submit()">
+                                                    </label>
+                                                    <label class="ms-2">
+                                                    <button type="button" class="btn bg-danger-subtle text-danger"
+                                                        id="reset-button">Hapus</button>
+                                                    </label>
+                                                </div>
+                                                <small class="mb-0">Hanya JPEG, JPG, GIF or PNG. Maksimal 10MB</small>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="ms-3 name">
-                                <h5 class="font-bold">Cobra</h5>
-                                <h6 class="text-muted mb-0">@cobra</h6>
+                            <div class="col-lg-6 d-flex align-items-stretch">
+                                <div class="card w-100 border position-relative overflow-hidden">
+                                    <div class="card-body p-4">
+                                        <h4 class="card-title mb-4">Ubah Password</h4>
+                                        @if (session('password'))
+                                            <div class="alert alert-success" role="alert">
+                                                {{ session('password') }}
+                                            </div>
+                                        @endif
+                                        <form id="password-update-form" action="{{ route('password.updatePassword') }}"
+                                            method="POST">
+                                            @csrf
+                                            @method('PUT')
+
+                                            <div class="mb-3">
+                                                <label for="current_password" class="form-label">Password Lama</label>
+                                                <input type="password" class="form-control" id="current_password"
+                                                    name="current_password" required>
+                                                @error('current_password')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="new_password" class="form-label">Password Baru</label>
+                                                <input type="password" class="form-control" id="new_password"
+                                                    name="new_password" required>
+                                                @error('new_password')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="new_password_confirmation" class="form-label">Password
+                                                    Konfirmasi
+                                                </label>
+                                                <input type="password" class="form-control" id="new_password_confirmation"
+                                                    name="new_password_confirmation" required>
+                                                @error('new_password_confirmation')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+
+                                            <button type="submit" id="submit-update-password"
+                                                class="btn btn-primary mt-3">Ubah</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="card w-100 border position-relative overflow-hidden mb-0">
+                                    <div class="card-body p-4">
+                                        <h4 class="card-title">Personal Details</h4>
+                                        @if (isset($userPegawai) && $userPegawai)
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="mb-3">
+                                                    <label for="exampleInputtext" class="form-label">Name :</label>
+                                                    <p class="form-control-static">{{ $userPegawai->nama ?? 'Data Tidak Ada' }}
+                                                    </p>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">NIP/NIK :</label>
+                                                    <p class="form-control-static">
+                                                        {{ $userPegawai->nip_nik ?? 'Data Tidak Ada' }}</p>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="exampleInputtext1" class="form-label">Jabatan :</label>
+                                                    <p class="form-control-static">
+                                                        {{ $userPegawai->jabatan_akademik ?? 'Data Tidak Ada' }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="mb-3">
+                                                    <label for="exampleInputtext1" class="form-label">Email :</label>
+                                                    <p class="form-control-static">{{ $userPegawai->email ?? 'Data Tidak Ada' }}
+                                                    </p>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">No Telepon :</label>
+                                                    <p class="form-control-static">
+                                                        {{ $userPegawai->no_telepon ?? 'Data Tidak Ada' }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @elseif (isset($userMahasiswa) && $userMahasiswa)
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="mb-3">
+                                                    <label for="exampleInputtext" class="form-label">Nama :</label>
+                                                    <p class="form-control-static">{{ $userMahasiswa->nama ?? 'Data Tidak Ada' }}
+                                                    </p>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">NIM :</label>
+                                                    <p class="form-control-static">
+                                                        {{ $userMahasiswa->nim ?? 'Data Tidak Ada' }}</p>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="exampleInputtext1" class="form-label">Prodi :</label>
+                                                    <p class="form-control-static">
+                                                        {{ $userMahasiswa->prodis->prodi ?? 'Data Tidak Ada' }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="mb-3">
+                                                    <label for="exampleInputtext1" class="form-label">Angkatan :</label>
+                                                    <p class="form-control-static">{{ $userMahasiswa->angkatan ?? 'Data Tidak Ada' }}
+                                                    </p>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">IPK :</label>
+                                                    <p class="form-control-static">
+                                                        {{ $userMahasiswa->ipk ?? 'Data Tidak Ada' }}</p>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="exampleInputtext3" class="form-label">Email :</label>
+                                                    <p class="form-control-static">
+                                                        {{ $user->email ?? 'Data Tidak Ada' }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @else
+                                            <p>Admin</p>
+                                        @endif
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h4>Recent Messages</h4>
-                    </div>
-                    <div class="card-content pb-4">
-                        <div class="recent-message d-flex px-4 py-3">
-                            <div class="avatar avatar-lg">
-                                <img src="{{ asset('template/assets/images/faces/4.jpg') }}">
-                            </div>
-                            <div class="name ms-4">
-                                <h5 class="mb-1">Hank Schrader</h5>
-                                <h6 class="text-muted mb-0">@johnducky</h6>
-                            </div>
-                        </div>
-                        <div class="recent-message d-flex px-4 py-3">
-                            <div class="avatar avatar-lg">
-                                <img src="{{ asset('template/assets/images/faces/5.jpg') }}">
-                            </div>
-                            <div class="name ms-4">
-                                <h5 class="mb-1">Dean Winchester</h5>
-                                <h6 class="text-muted mb-0">@imdean</h6>
-                            </div>
-                        </div>
-                        <div class="recent-message d-flex px-4 py-3">
-                            <div class="avatar avatar-lg">
-                                <img src="{{ asset('template/assets/images/faces/1.jpg') }}">
-                            </div>
-                            <div class="name ms-4">
-                                <h5 class="mb-1">John Dodol</h5>
-                                <h6 class="text-muted mb-0">@dodoljohn</h6>
-                            </div>
-                        </div>
-                        <div class="px-4">
-                            <button class='btn btn-block btn-xl btn-light-primary font-bold mt-3'>Start
-                                Conversation</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h4>Visitors Profile</h4>
-                    </div>
-                    <div class="card-body">
-                        <div id="chart-visitors-profile"></div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
     </div>
+    <script>
+        document.getElementById('reset-button').addEventListener('click', function() {
+            fetch('{{ route('profile.reset') }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    location.reload();
+                } else {
+                    alert('Failed to reset profile picture');
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Form submit event listener
+            var submit = document.getElementById('submit-update-password')
+            document.getElementById('password-update-form').addEventListener(submit, function(event) {
+                event.preventDefault(); // Prevent the form from submitting normally
+
+                // Collect form data
+                const formData = new FormData(this);
+
+                // Send POST request using Fetch API
+                fetch(this.action, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        },
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            // Clear form inputs on success
+                            document.getElementById('current_password').value = '';
+                            document.getElementById('new_password').value = '';
+                            document.getElementById('new_password_confirmation').value = '';
+
+                            // Show success message
+                            const successAlert =
+                                `<div class="alert alert-success" role="alert">${data.message}</div>`;
+                            document.getElementById('password-update-form').insertAdjacentHTML(
+                                'beforebegin', successAlert);
+                        } else if (data.status === 'error') {
+                            // Display error messages
+                            Object.keys(data.errors).forEach(key => {
+                                const errorSpan = document.getElementById(key + '-error');
+                                if (errorSpan) {
+                                    errorSpan.textContent = data.errors[key][0];
+                                }
+                            });
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            });
+        });
+    </script>
 @endsection

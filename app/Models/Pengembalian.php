@@ -12,6 +12,9 @@ class Pengembalian extends Model
 
     protected $fillable = ['peminjamen_id', 'pegawais_id', 'tanggal_kembali'];
 
+    protected $table = 'pengembalians';
+    protected $primaryKey = 'id';
+
     public function users(): BelongsTo
     {
         return $this->belongsTo(User::class, 'users_id', 'id');

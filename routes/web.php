@@ -18,6 +18,7 @@ use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,7 +38,7 @@ Route::get('/', function () {
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])
     ->middleware('guest')
     ->name('login');
-    Route::post('/login', [AuthenticatedSessionController::class, 'store'])
+Route::post('/login', [AuthenticatedSessionController::class, 'store'])
     ->middleware('guest');
 Route::get('/admin/logout', [AdminController::class, 'destroy'])->name('admin.logout');
 
@@ -45,9 +46,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile_user', function () {
         return view('admin.a_profile.profile');
     })->name('profile_user');
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile_user', [UserProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile_user/update', [UserProfileController::class, 'update'])->name('profile.update');
+    Route::post('/profile_user/reset', [UserProfileController::class, 'resetProfilePicture'])->name('profile.reset');
+    Route::delete('/profile_user', [UserProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::put('/profile_user/password/update', [UserProfileController::class, 'updatePassword'])->name('password.updatePassword');
 
     // Barang
     Route::prefix('barang')->group(function () {
@@ -199,4 +202,3 @@ Route::middleware(['auth', 'verified'])->group(function () {
         });
     });
 });
-

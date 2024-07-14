@@ -12,6 +12,8 @@ class Berita extends Model
 
     protected $fillable = ['kategori_beritas_id', 'judul', 'catatan', 'gambar', 'tanggal_publikasi'];
 
+    protected $table = 'beritas';
+    protected $primaryKey = 'id';
 
     public function kategori_beritas(): BelongsTo
     {

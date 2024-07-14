@@ -5,7 +5,7 @@
         <div class="sidebar-header position-relative">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="logo">
-                    <a href="{{ route('profile_user') }}"><img src="{{ asset('template/assets/images/logo/logo.svg') }}"
+                    <a href="{{ route('profile.edit') }}"><img src="{{ asset('template/assets/images/logo/logo.svg') }}"
                             alt="Logo" srcset=""></a>
                 </div>
                 <div class="sidebar-toggler  x">

@@ -12,6 +12,9 @@ class BarangMasuk extends Model
 
     protected $fillable = ['barangs_id', 'suppliers_id', 'jumlah_barang', 'tanggal_masuk'];
 
+    protected $table = 'barang_masuks';
+    protected $primaryKey = 'id';
+
     public function barangs(): BelongsTo
     {
         return $this->belongsTo(Barang::class);

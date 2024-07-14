@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use Database\Factories\beritaFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -22,5 +24,14 @@ class DatabaseSeeder extends Seeder
         $this->call([PegawaisSeeder::class,]);
         $this->call([ProdisSeeder::class,]);
         $this->call([MahasiswasSeeder::class,]);
+        $this->call([ruanganSeeder::class,]);
+        $this->call([suplierSeeder::class,]);
+        $this->call([barangSeeder::class,]);
+        $this->call([peminjamanSeeder::class,]);
+        $this->call([pengembalianSeeder::class,]);
+        $this->call([barangMasukSeeder::class,]);
+        $this->call([barangKeluarSeeder::class,]);
+        $this->call([kategoriBeritaSeeder::class,]);
+        $this->call([beritaSeeder::class,]);
     }
 }

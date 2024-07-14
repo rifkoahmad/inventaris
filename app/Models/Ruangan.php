@@ -10,4 +10,7 @@ class Ruangan extends Model
     use HasFactory;
 
     protected $fillable = ['nama_ruangan','gedung'];
+
+    protected $table = 'ruangans';
+    protected $primaryKey = 'id';
 }

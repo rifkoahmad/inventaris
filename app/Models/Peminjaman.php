@@ -12,6 +12,9 @@ class Peminjaman extends Model
 
     protected $fillable = ['users_id', 'barangs_id', 'pegawais_id', 'jumlah', 'tanggal_pinjam', 'lama_pinjam'];
 
+    protected $table = 'peminjamen';
+    protected $primaryKey = 'id';
+
     public function users(): BelongsTo
     {
         return $this->belongsTo(User::class, 'users_id', 'id');

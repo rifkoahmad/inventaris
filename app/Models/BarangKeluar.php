@@ -12,6 +12,9 @@ class BarangKeluar extends Model
 
     protected $fillable = ['users_id','tanggal_keluar'];
 
+    protected $table = 'barang_keluars';
+    protected $primaryKey = 'id';
+
     public function users(): BelongsTo
     {
         return $this->belongsTo(User::class, 'users_id', 'id');

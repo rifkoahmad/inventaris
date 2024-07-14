@@ -10,4 +10,7 @@ class Prodi extends Model
     use HasFactory;
 
     protected $fillable = ['prodi','kaprodi'];
+
+    protected $table = 'prodis';
+    protected $primaryKey = 'id';
 }

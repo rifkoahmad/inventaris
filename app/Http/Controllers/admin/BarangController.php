@@ -34,6 +34,7 @@ class BarangController extends Controller
     }
 
     $barang = $query->get();
+    debug($barang);
     return view('admin.a_barang.index', compact('barang'));
 }
 

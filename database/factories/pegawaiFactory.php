@@ -1,16 +1,24 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Factories;
 
-use Illuminate\Database\Seeder;
+use App\Models\Pegawai;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\DB;
 
-class PegawaisSeeder extends Seeder
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\pegawai>
+ */
+class pegawaiFactory extends Factory
 {
     /**
-     * Run the database seeds.
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
      */
-    public function run(): void
+    protected $model = Pegawai::class;
+
+    public function definition()
     {
         $dosenData = [
             [1, 'ALDE ALANDA, S.Kom, M.T', '198808252015041002',     'dosen', '08123456789', 'alde@pnp.ac.id', ''],

@@ -10,4 +10,7 @@ class KategoriBerita extends Model
     use HasFactory;
 
     protected $fillable = ['nama','slug'];
+
+    protected $table = 'kategori_beritas';
+    protected $primaryKey = 'id';
 }

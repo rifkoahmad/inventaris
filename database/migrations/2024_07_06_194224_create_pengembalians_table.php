@@ -13,8 +13,14 @@ return new class extends Migration
     {
         Schema::create('pengembalians', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('peminjamen_id')->constrained('peminjamen');
-            $table->foreignId('pegawais_id')->constrained('pegawais');
+            $table->foreignId('peminjamen_id')
+                ->constrained('peminjamen')
+                ->cascadeOnDelete();
+
+            $table->foreignId('pegawais_id')
+                ->constrained('pegawais')
+                ->cascadeOnDelete();
+
             $table->date('tanggal_kembali');
             $table->timestamps();
         });
