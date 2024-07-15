@@ -93,8 +93,9 @@ class BeritaController extends Controller
             $data['gambar'] = $request->oldImg;
         }
 
-        $berita = Berita::find($id)->update($data);
+        $berita = Berita::find($id);
         if ($berita) {
+            $berita->update($data);
             return to_route('berita.index')->with('success', 'Berhasil Mengubah Data');
         } else {
             return to_route('berita.index')->with('failed', 'Gagal Mengubah Data');

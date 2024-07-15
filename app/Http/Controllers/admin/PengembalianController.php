@@ -85,8 +85,9 @@ class PengembalianController extends Controller
      */
     public function destroy(string $id)
     {
-        $pengembalian = Pengembalian::find($id)->delete();
+        $pengembalian = Pengembalian::find($id);
         if ($pengembalian) {
+            $pengembalian->delete();
             return to_route('pengembalian.index')->with('success', 'Berhasil Menghapus Data');
         } else {
             return to_route('pengembalian.index')->with('failed', 'Gagal Menghapus Data');

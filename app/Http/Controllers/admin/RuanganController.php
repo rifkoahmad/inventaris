@@ -87,8 +87,9 @@ class RuanganController extends Controller
      */
     public function destroy(string $id)
     {
-        $ruangan = Ruangan::find($id)->delete();
+        $ruangan = Ruangan::find($id);
         if ($ruangan) {
+            $ruangan->delete();
             return to_route('ruangan.index')->with('success', 'Berhasil Menghapus Data');
         } else {
             return to_route('ruangan.index')->with('failed', 'Gagal Menghapus Data');

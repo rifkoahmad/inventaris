@@ -13,6 +13,6 @@ class peminjamanSeeder extends Seeder
      */
     public function run(): void
     {
-        Peminjaman::factory()->count(30)->create();
+        Peminjaman::factory()->count(100)->create();
     }
 }

@@ -13,6 +13,6 @@ class barangMasukSeeder extends Seeder
      */
     public function run(): void
     {
-        BarangMasuk::factory()->count(20)->create();
+        BarangMasuk::factory()->count(89)->create();
     }
 }

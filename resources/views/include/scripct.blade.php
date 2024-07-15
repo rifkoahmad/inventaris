@@ -15,6 +15,14 @@
 <!-- DataTables JS -->
 <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<!-- Load Axios Library for making HTTP requests -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#dataTable').DataTable();
+    });
+</script>
 {{-- Sweetalert --}}
 {{-- <script src="{{ asset('template/assets/extensions/sweetalert2/sweetalert2.min.js')}}"></script>>
 <script src="{{ asset('template/assets/js/pages/sweetalert2.js')}}"></script>> --}}

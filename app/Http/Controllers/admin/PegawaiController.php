@@ -93,8 +93,9 @@ class PegawaiController extends Controller
             $data['foto'] = $request->oldImg;
         }
 
-        $berita = Pegawai::find($id)->update($data);
+        $berita = Pegawai::find($id);
         if ($berita) {
+            $berita->update($data);
             return to_route('pegawai.index')->with('success', 'Berhasil Mengubah Data');
         } else {
             return to_route('pegawai.index')->with('failed', 'Gagal Mengubah Data');

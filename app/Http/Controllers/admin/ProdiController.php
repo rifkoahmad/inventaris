@@ -86,8 +86,9 @@ class ProdiController extends Controller
      */
     public function destroy(string $id)
     {
-        $prodi = Prodi::find($id)->delete();
+        $prodi = Prodi::find($id);
         if ($prodi) {
+            $prodi->delete();
             return to_route('prodi.index')->with('success', 'Berhasil Menghapus Data');
         } else {
             return to_route('prodi.index')->with('failed', 'Gagal Menghapus Data');

@@ -20,10 +20,11 @@ class barangKeluarFactory extends Factory
 
     public function definition()
     {
+        $tanggal = $this->faker->dateTimeBetween('2020-01-01', '2024-5-31')->format('Y-m-d');
         $userId = User::inRandomOrder()->first()->id;
         return [
             'users_id' => $userId,
-            'tanggal_keluar' => $this->faker->date(),
+            'tanggal_keluar' => $tanggal,
         ];
     }
 }

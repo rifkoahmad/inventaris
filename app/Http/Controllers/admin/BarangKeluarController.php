@@ -83,8 +83,9 @@ class BarangKeluarController extends Controller
      */
     public function destroy(string $id)
     {
-        $barangkeluar = BarangKeluar::find($id)->delete();
+        $barangkeluar = BarangKeluar::find($id);
         if ($barangkeluar) {
+            $barangkeluar->delete();
             return to_route('barangkeluar.index')->with('success', 'Berhasil Menghapus Data');
         } else {
             return to_route('barangkeluar.index')->with('failed', 'Gagal Menghapus Data');

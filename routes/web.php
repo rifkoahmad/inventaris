@@ -87,9 +87,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Admin & Pimpinan Jurusan
     Route::middleware(['role:admin|pimpinanJurusan'])->group(function () {
         // Dashboard
-        Route::get('/dashboard_data', function () {
-            return view('admin.a_dashboard.dashboard');
-        })->name('dashboard');
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
         // Barang Masuk
         Route::prefix('barang-masuk')->group(function () {

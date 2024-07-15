@@ -13,6 +13,6 @@ class pengembalianSeeder extends Seeder
      */
     public function run(): void
     {
-        Pengembalian::factory()->count(18)->create();
+        Pengembalian::factory()->count(32)->create();
     }
 }

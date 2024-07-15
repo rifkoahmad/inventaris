@@ -1,264 +1,292 @@
 @extends('kerangka.master')
 @section('title', 'Dashboard')
 @section('content')
-    <div class="page-content">
-        <section class="row">
-            <div class="col-12 col-lg-9">
-                <div class="row">
-                    <div class="col-6 col-lg-3 col-md-6">
-                        <div class="card">
-                            <div class="card-body px-4 py-4-5">
-                                <div class="row">
-                                    <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                                        <div class="stats-icon purple mb-2">
-                                            <i class="iconly-boldShow"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                        <h6 class="text-muted font-semibold">Profile Views</h6>
-                                        <h6 class="font-extrabold mb-0">112.000</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6 col-lg-3 col-md-6">
-                        <div class="card">
-                            <div class="card-body px-4 py-4-5">
-                                <div class="row">
-                                    <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                                        <div class="stats-icon blue mb-2">
-                                            <i class="iconly-boldProfile"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                        <h6 class="text-muted font-semibold">Followers</h6>
-                                        <h6 class="font-extrabold mb-0">183.000</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6 col-lg-3 col-md-6">
-                        <div class="card">
-                            <div class="card-body px-4 py-4-5">
-                                <div class="row">
-                                    <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                                        <div class="stats-icon green mb-2">
-                                            <i class="iconly-boldAdd-User"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                        <h6 class="text-muted font-semibold">Following</h6>
-                                        <h6 class="font-extrabold mb-0">80.000</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6 col-lg-3 col-md-6">
-                        <div class="card">
-                            <div class="card-body px-4 py-4-5">
-                                <div class="row">
-                                    <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                                        <div class="stats-icon red mb-2">
-                                            <i class="iconly-boldBookmark"></i>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                        <h6 class="text-muted font-semibold">Saved Post</h6>
-                                        <h6 class="font-extrabold mb-0">112</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Profile Visit</h4>
-                            </div>
-                            <div class="card-body">
-                                <div id="chart-profile-visit"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12 col-xl-4">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Profile Visit</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="d-flex align-items-center">
-                                            <svg class="bi text-primary" width="32" height="32" fill="blue"
-                                                style="width:10px">
-                                                <use xlink:href="assets/images/bootstrap-icons.svg#circle-fill" />
-                                            </svg>
-                                            <h5 class="mb-0 ms-3">Europe</h5>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <h5 class="mb-0">862</h5>
-                                    </div>
-                                    <div class="col-12">
-                                        <div id="chart-europe"></div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="d-flex align-items-center">
-                                            <svg class="bi text-success" width="32" height="32" fill="blue"
-                                                style="width:10px">
-                                                <use xlink:href="assets/images/bootstrap-icons.svg#circle-fill" />
-                                            </svg>
-                                            <h5 class="mb-0 ms-3">America</h5>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <h5 class="mb-0">375</h5>
-                                    </div>
-                                    <div class="col-12">
-                                        <div id="chart-america"></div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="d-flex align-items-center">
-                                            <svg class="bi text-danger" width="32" height="32" fill="blue"
-                                                style="width:10px">
-                                                <use xlink:href="assets/images/bootstrap-icons.svg#circle-fill" />
-                                            </svg>
-                                            <h5 class="mb-0 ms-3">Indonesia</h5>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <h5 class="mb-0">1025</h5>
-                                    </div>
-                                    <div class="col-12">
-                                        <div id="chart-indonesia"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-xl-8">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>Latest Comments</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-hover table-lg">
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Comment</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td class="col-3">
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="avatar avatar-md">
-                                                            <img src="{{ asset('template/assets/images/faces/5.jpg') }}">
-                                                        </div>
-                                                        <p class="font-bold ms-3 mb-0">Cantik</p>
-                                                    </div>
-                                                </td>
-                                                <td class="col-auto">
-                                                    <p class=" mb-0">Congratulations on your graduation!</p>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="col-3">
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="avatar avatar-md">
-                                                            <img src="{{ asset('template/assets/images/faces/2.jpg') }}">
-                                                        </div>
-                                                        <p class="font-bold ms-3 mb-0">Ganteng</p>
-                                                    </div>
-                                                </td>
-                                                <td class="col-auto">
-                                                    <p class=" mb-0">Wow amazing design! Can you make another tutorial for
-                                                        this design?</p>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-lg-3">
-                <div class="card">
-                    <div class="card-body py-4 px-5">
+    <style>
+        .apexcharts-legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
 
-                        <div class="d-flex align-items-center">
-                            <div class="avatar avatar-xl">
-                                <img src="{{ asset('template/assets/images/faces/1.jpg') }}" alt="Face 1">
+        .apexcharts-legend-series {
+            width: calc(50% - 10px);
+            display: flex;
+            justify-content: center;
+            margin: 5px;
+        }
+
+        .apexcharts-legend-series .apexcharts-legend-item {
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+        }
+
+        .apexcharts-legend-series .apexcharts-legend-marker {
+            width: 10px;
+            height: 10px;
+            margin-right: 5px;
+        }
+    </style>
+    <div class="page-content">
+        <div class="container-fluid container-respons">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row justify-content-center">
+                        <div class="row my-3 respon-ta">
+                            <div class="row">
+                                <div class="col-6 col-lg-3 col-md-6">
+                                    <div class="card">
+                                        <div class="card-body px-4 py-4-5">
+                                            <div class="row">
+                                                <div
+                                                    class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
+                                                    <div class="stats-icon purple mb-2">
+                                                        <i class="iconly-boldShow"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
+                                                    <h6 class="text-muted font-semibold">Barang Masuk</h6>
+                                                    <h6 class="font-extrabold mb-0" id="jumlah_barang_masuk">
+                                                        {{ $totalBarangMasuk }}</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-lg-3 col-md-6">
+                                    <div class="card">
+                                        <div class="card-body px-4 py-4-5">
+                                            <div class="row">
+                                                <div
+                                                    class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
+                                                    <div class="stats-icon blue mb-2">
+                                                        <i class="iconly-boldProfile"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
+                                                    <h6 class="text-muted font-semibold">Barang Keluar</h6>
+                                                    <h6 class="font-extrabold mb-0" id="jumlah_barang_keluar">
+                                                        {{ $totalBarangKeluar }}</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-lg-3 col-md-6">
+                                    <div class="card">
+                                        <div class="card-body px-4 py-4-5">
+                                            <div class="row">
+                                                <div
+                                                    class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
+                                                    <div class="stats-icon green mb-2">
+                                                        <i class="iconly-boldAdd-User"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
+                                                    <h6 class="text-muted font-semibold">Peminjaman</h6>
+                                                    <h6 class="font-extrabold mb-0" id="jumlah_peminjaman">
+                                                        {{ $totalPeminjaman }}</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-lg-3 col-md-6">
+                                    <div class="card">
+                                        <div class="card-body px-4 py-4-5">
+                                            <div class="row">
+                                                <div
+                                                    class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
+                                                    <div class="stats-icon red mb-2">
+                                                        <i class="iconly-boldBookmark"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
+                                                    <h6 class="text-muted font-semibold">Pengembalian</h6>
+                                                    <h6 class="font-extrabold mb-0">
+                                                        {{ $totalPengembalian }}
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="ms-3 name">
-                                <h5 class="font-bold">Cobra</h5>
-                                <h6 class="text-muted mb-0">@cobra</h6>
+                            <div class="col-lg-12 d-flex align-items-stretch mt-3">
+                                <div class="card w-100">
+                                    <div class="card-body">
+                                        <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
+                                            <div class="mb-3 mb-sm-0"></div>
+                                            <div></div>
+                                        </div>
+                                        <h4>Chart</h4>
+                                        <div id="chart" style="min-height: 350px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 d-flex align-items-stretch mt-3">
+                                <div class="card w-100">
+                                    <div class="card-body">
+                                        <table class="table table-hover table-lg" id="dataTable" width="100%"
+                                            cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th>User</th>
+                                                    <th>Description</th>
+                                                    <th>Created at</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($logs as $log)
+                                                    <tr>
+                                                        <th class="col-3">{{ $log->causer->name ?? 'anonim' }}</th>
+                                                        <th class="col-auto">{{ $log->description ?? 'null' }}</th>
+                                                        <th class="col-auto">{{ $log->created_at }}</th>
+                                                        <th class="col-auto"><a href="#"
+                                                                class="badge fw-semibold py-1 w-85 bg-primary-subtle text-primary">Detail</a>
+                                                        </th>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h4>Recent Messages</h4>
-                    </div>
-                    <div class="card-content pb-4">
-                        <div class="recent-message d-flex px-4 py-3">
-                            <div class="avatar avatar-lg">
-                                <img src="{{ asset('template/assets/images/faces/4.jpg') }}">
-                            </div>
-                            <div class="name ms-4">
-                                <h5 class="mb-1">Hank Schrader</h5>
-                                <h6 class="text-muted mb-0">@johnducky</h6>
-                            </div>
-                        </div>
-                        <div class="recent-message d-flex px-4 py-3">
-                            <div class="avatar avatar-lg">
-                                <img src="{{ asset('template/assets/images/faces/5.jpg') }}">
-                            </div>
-                            <div class="name ms-4">
-                                <h5 class="mb-1">Dean Winchester</h5>
-                                <h6 class="text-muted mb-0">@imdean</h6>
-                            </div>
-                        </div>
-                        <div class="recent-message d-flex px-4 py-3">
-                            <div class="avatar avatar-lg">
-                                <img src="{{ asset('template/assets/images/faces/1.jpg') }}">
-                            </div>
-                            <div class="name ms-4">
-                                <h5 class="mb-1">John Dodol</h5>
-                                <h6 class="text-muted mb-0">@dodoljohn</h6>
-                            </div>
-                        </div>
-                        <div class="px-4">
-                            <button class='btn btn-block btn-xl btn-light-primary font-bold mt-3'>Start
-                                Conversation</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h4>Visitors Profile</h4>
-                    </div>
-                    <div class="card-body">
-                        <div id="chart-visitors-profile"></div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
     </div>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            // Data for Chart
+            const barangMasuk = @json($barangMasuk);
+            const barangKeluar = @json($barangKeluar);
+            const peminjamanBarang = @json($peminjamanBarang);
+            const pengembalianBarang = @json($pengembalianBarang);
+            const bulan = @json($bulan);
+
+            // Konfigurasi Chart
+            const chartOptions = {
+                series: [{
+                    name: 'Barang Masuk',
+                    data: bulan.map(month => barangMasuk[month] || 0)
+                }, {
+                    name: 'Barang Keluar',
+                    data: bulan.map(month => barangKeluar[month] || 0)
+                }, {
+                    name: 'Peminjaman Barang',
+                    data: bulan.map(month => peminjamanBarang[month] || 0)
+                }, {
+                    name: 'Pengembalian Barang',
+                    data: bulan.map(month => pengembalianBarang[month] || 0)
+                }],
+                chart: {
+                    type: 'bar',
+                    height: 350,
+                    offsetX: -15,
+                    toolbar: {
+                        show: true
+                    },
+                    foreColor: "#adb0bb",
+                    fontFamily: 'inherit',
+                },
+                colors: ['#00E396', '#FF4560', '#FEB019', '#008FFB'],
+                plotOptions: {
+                    bar: {
+                        horizontal: false,
+                        columnWidth: "35%",
+                        borderRadius: [6],
+                        borderRadiusApplication: 'end',
+                        borderRadiusWhenStacked: 'all'
+                    },
+                },
+                markers: {
+                    size: 0
+                },
+                dataLabels: {
+                    enabled: false,
+                },
+                legend: {
+                    show: true,
+                    position: 'bottom',
+                    horizontalAlign: 'center',
+                    floating: false,
+                    offsetY: 10,
+                    offsetX: 0,
+                    itemMargin: {
+                        horizontal: 2,
+                        vertical: 15
+                    },
+                    markers: {
+                        width: 10,
+                        height: 10,
+                        radius: 5
+                    },
+                    formatter: function(seriesName, opts) {
+                        return seriesName;
+                    }
+                },
+                grid: {
+                    borderColor: "rgba(0,0,0,0.1)",
+                    strokeDashArray: 3,
+                    xaxis: {
+                        lines: {
+                            show: false,
+                        },
+                    },
+                },
+                xaxis: {
+                    type: "category",
+                    categories: bulan,
+                    labels: {
+                        style: {
+                            cssClass: "grey--text lighten-2--text fill-color"
+                        },
+                    },
+                },
+                yaxis: {
+                    show: true,
+                    min: 0,
+                    max: Math.max(
+                        ...bulan.map(month => barangMasuk[month] || 0),
+                        ...bulan.map(month => barangKeluar[month] || 0),
+                        ...bulan.map(month => peminjamanBarang[month] || 0),
+                        ...bulan.map(month => pengembalianBarang[month] || 0)
+                    ) + 5,
+                    tickAmount: 4,
+                    labels: {
+                        style: {
+                            cssClass: "grey--text lighten-2--text fill-color",
+                        },
+                    },
+                },
+                stroke: {
+                    show: true,
+                    width: 3,
+                    lineCap: "butt",
+                    colors: ["transparent"],
+                },
+                tooltip: {
+                    theme: "light"
+                },
+                responsive: [{
+                    breakpoint: 600,
+                    options: {
+                        plotOptions: {
+                            bar: {
+                                borderRadius: 3,
+                            }
+                        },
+                    }
+                }]
+            };
+
+            // Inisialisasi Chart
+            const chart = new ApexCharts(document.querySelector("#chart"), chartOptions);
+            chart.render();
+        });
+    </script>
 @endsection

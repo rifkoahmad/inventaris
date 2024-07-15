@@ -89,8 +89,9 @@ class KategoriBeritaController extends Controller
      */
     public function destroy(string $id)
     {
-        $kategori = KategoriBerita::find($id)->delete();
+        $kategori = KategoriBerita::find($id);
         if ($kategori) {
+            $kategori->delete();
             return to_route('kategoriberita.index')->with('success', 'Berhasil Menghapus Data');
         } else {
             return to_route('kategoriberita.index')->with('failed', 'Gagal Menghapus Data');

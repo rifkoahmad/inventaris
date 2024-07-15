@@ -110,8 +110,9 @@ class BarangController extends Controller
             $data['foto'] = $request->oldImg;
         }
 
-        $barang = Barang::find($id)->update($data);
+        $barang = Barang::find($id);
         if ($barang) {
+            $barang->update($data);
             return to_route('barang.index')->with('success', 'Berhasil Mengubah Data');
         } else {
             return to_route('barang.index')->with('failed', 'Gagal Mengubah Data');

@@ -86,8 +86,9 @@ class SupplierController extends Controller
      */
     public function destroy(string $id)
     {
-        $supplier = Supplier::find($id)->delete();
+        $supplier = Supplier::find($id);
         if ($supplier) {
+            $supplier->delete();
             return to_route('supplier.index')->with('success', 'Berhasil Menghapus Data');
         } else {
             return to_route('supplier.index')->with('failed', 'Gagal Menghapus Data');

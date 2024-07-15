@@ -111,8 +111,8 @@ class MahasiswaController extends Controller
         $data = $request->validated();
 
         $mahasiswa = Mahasiswa::find($id);
-        $updated = $mahasiswa->update($data);
-        if ($updated) {
+        if ($mahasiswa) {
+            $mahasiswa->update($data);
             return redirect()->route('mahasiswa.index')->with('success', 'Berhasil Mengubah Data');
         } else {
             return redirect()->route('mahasiswa.index')->with('failed', 'Gagal Mengubah Data');
@@ -125,9 +125,8 @@ class MahasiswaController extends Controller
     public function destroy($id)
     {
         $mahasiswa = Mahasiswa::findOrFail($id);
-        $deleted = $mahasiswa->delete();
-
-        if ($deleted) {
+        if ($mahasiswa) {
+            $mahasiswa->delete();
             return redirect()->route('mahasiswa.index')->with('success', 'Berhasil Menghapus Data');
         } else {
             return redirect()->route('mahasiswa.index')->with('failed', 'Gagal Menghapus Data');

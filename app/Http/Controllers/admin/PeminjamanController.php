@@ -106,8 +106,9 @@ class PeminjamanController extends Controller
      */
     public function destroy(string $id)
     {
-        $peminjaman = Peminjaman::find($id)->delete();
+        $peminjaman = Peminjaman::find($id);
         if ($peminjaman) {
+            $peminjaman->delete();
             return to_route('peminjaman.index')->with('success', 'Berhasil Menghapus Data');
         } else {
             return to_route('peminjaman.index')->with('failed', 'Gagal Menghapus Data');
